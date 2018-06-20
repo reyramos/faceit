@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello</title>
+</head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+      integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <canvas id="canvas" width="640" height="480"></canvas>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button type="button" class="btn btn-primary">reCapture</button>
+        </div>
+    </div>
+</div>
+
+<script>
+	require('./renderer.js');
+</script>
+
+</body>
+</html>

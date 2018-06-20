@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+
+    <Product Name='{{APP_NAME}}'
+             Id='*'
+             UpgradeCode='{{UPGRADE_CODE}}'
+             Language='1033'
+             Version='{{APP_VERSION}}'
+             Manufacturer='{{MANUFACTURER}}'>
+
+
+        <Package Id='*' InstallerVersion='300' Compressed='yes' InstallScope="perMachine"/>
+
+        <MajorUpgrade
+                Schedule="afterInstallInitialize"
+                AllowDowngrades="no"
+                DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit."
+                AllowSameVersionUpgrades="no"/>
+
+
+        <!--        <Upgrade Id="{{UPGRADE_CODE}}">
+                    &lt;!&ndash; Detect older product versions &ndash;&gt;
+                    <UpgradeVersion OnlyDetect="no" IncludeMinimum="no" IncludeMaximum="no"
+                                    Minimum="0.0.1"
+                                    Maximum="{{APP_VERSION}}"
+                                    Property="PREVIOUSVERSIONSINSTALLED"/>
+                    &lt;!&ndash; Detect newer product versions &ndash;&gt;
+                    <UpgradeVersion OnlyDetect="yes" IncludeMinimum="no" IncludeMaximum="yes"
+                                    Maximum="{{APP_VERSION}}"
+                                    Property="NEWERVERSIONDETECTED"/>
+                </Upgrade>
+
+
+                <InstallExecuteSequence>
+                    <RemoveExistingProducts After="InstallInitialize"/>
+                </InstallExecuteSequence>-->
+
+
+        <util:CloseApplication CloseMessage="yes" Description="Close your application before installing"
+                               Id="ClosePhoenix" RebootPrompt="no" Target="{{APP_EXE_NAME}}" TerminateProcess="1"/>
+
+
+        <Media Id='1' Cabinet='{{APP_CAB}}' EmbedCab='yes'/>
+
+        <Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="DesktopFolder" Name="{{APP_NAME}}"/>
+            <Directory Id="ProgramFilesFolder">
+                <Directory Id="APPLICATIONROOTDIRECTORY" Name="{{APP_NAME}}">
+                    {{DIRECTORY}}
+                </Directory>
+            </Directory>
+            <Directory Id="ProgramMenuFolder">
+                <Directory Id="ApplicationProgramsFolder" Name="{{APP_NAME}}"/>
+            </Directory>
+        </Directory>
+
+
+        {{APPLICATION_ICON_SOURCE}}
+
+        {{DIRECTORY_REF}}
+
+        <Feature Id="MainApplication" Title="Main Application" Level="1">
+            {{COMPONENTS_REFS}}
+        </Feature>
+
+
+    </Product>
+</Wix>
+
+
